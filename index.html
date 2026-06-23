@@ -1010,6 +1010,11 @@ function render() {
         </div>
 
         <div class="mobile-stat">
+          <span>Shares</span>
+          <span>${p.shares.toLocaleString('en-US',{maximumFractionDigits:4})}</span>
+        </div>
+
+        <div class="mobile-stat">
           <span>P&L</span>
           <span class="${pnl != null && pnl >= 0 ? 'td-pos' : 'td-neg'}">
             ${pnl != null ? (pnl >= 0 ? '+' : '-') + money(pnl) : '—'}
