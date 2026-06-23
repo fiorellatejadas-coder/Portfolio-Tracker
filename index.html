@@ -163,11 +163,53 @@ footer { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-
   }
 
   .mobile-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
   }
+
+  .mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  }
+
+.mobile-day-pos {
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mobile-day-neg {
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mobile-stats {
+  margin-top: 12px;
+}
+
+.mobile-stat {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-family: var(--mono);
+}
+
+.mobile-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.mobile-actions button {
+  flex: 1;
+}
 
   .mobile-ticker {
     font-size: 18px;
