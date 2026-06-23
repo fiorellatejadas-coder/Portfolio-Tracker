@@ -197,6 +197,18 @@ footer { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-
 
   .mobile-buy { color:var(--green); border-color:var(--green); }
   .mobile-sell { color:var(--red); border-color:var(--red); }
+  .mobile-delete {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  border: none;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 0;
+}
+
+.mobile-delete:hover {
+  color: var(--red);}
 }
 
 @media (max-width: 780px) {
@@ -968,12 +980,24 @@ function render() {
       <div class="mobile-card">
         <div class="mobile-header">
           <div>
-            <div class="mobile-ticker">${p.ticker}</div>
-            <div class="mobile-company">${nameMap[p.ticker] || ''}</div>
-          </div>
-          <div class="${day != null && day >= 0 ? 'mobile-day-pos' : 'mobile-day-neg'}">
-            ${day != null ? pct(day) : '—'}
-          </div>
+    <div class="mobile-ticker">${p.ticker}</div>
+    <div class="mobile-company">
+      ${nameMap[p.ticker] || ''}
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:10px;">
+
+    <div class="${day != null && day >= 0 ? 'mobile-day-pos' : 'mobile-day-neg'}">
+      ${day != null ? pct(day) : '—'}
+    </div>
+
+    <button class="mobile-delete"
+      onclick="if(confirm('Delete ${p.ticker}?')) removePosition('${p.ticker}')">
+      ✕
+    </button>
+
+  </div>
         </div>
 
         <div class="mobile-spark">
