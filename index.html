@@ -868,15 +868,62 @@ function updateTs() {
 
 /* ── Render ── */
 /* ── Per-ticker sparklines ── */
+function createSparkChart(canvas, values, color, dataMin, dataMax, pad) {
+
+  if (!canvas) return null;
+
+  return new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: values.map((_, i) => i),
+      datasets: [{
+        data: values,
+        borderColor: color,
+        borderWidth: 1.5,
+        spanGaps: true,
+        pointRadius: 0,
+        tension: 0.3,
+        fill: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { enabled: false }
+      },
+      scales: {
+        x: { display: false },
+        y: {
+          display: false,
+          min: dataMin - pad,
+          max: dataMax + pad
+        }
+      },
+      elements: {
+        line: {
+          borderJoinStyle: 'round'
+        }
+      }
+    }
+  });
+
+}
+  
 function drawSparklines() {
   // Destroy old instances
   Object.values(sparkCharts).forEach(c => c.destroy());
   sparkCharts = {};
 
-  positions.forEach(p => {
-    const canvas = document.getElementById('spark-' + p.ticker);
-    if (!canvas) return;
+positions.forEach(p => {
 
+  const canvas = document.getElementById('spark-' + p.ticker);
+  const mobileCanvas = document.getElementById('mobile-spark-' + p.ticker);
+
+  if (!canvas && !mobileCanvas) return;
+  
     const key = tickerSnapshotKey(p.ticker);
     const snaps = LS.get(key) || {};
     const slotKeys = Object.keys(snaps).map(Number).sort((a,b) => a-b);
@@ -894,33 +941,27 @@ function drawSparklines() {
     const range = dataMax - dataMin;
     const pad = range > 0 ? range * 0.15 : dataMax * 0.005; // fallback padding if flat
 
-    sparkCharts[p.ticker] = new Chart(canvas, {
-      type: 'line',
-      data: {
-        labels: values.map((_, i) => i),
-        datasets: [{
-          data: values,
-          borderColor: color,
-          borderWidth: 1.5,
-          spanGaps: true,
-          pointRadius: 0,
-          tension: 0.3,
-          fill: false
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: false,
-        plugins: { legend: { display: false }, tooltip: { enabled: false } },
-        scales: {
-          x: { display: false },
-          y: { display: false, min: dataMin - pad, max: dataMax + pad }
-        },
-        elements: { line: { borderJoinStyle: 'round' } }
-      }
-    });
-  });
+    if (canvas) {
+  sparkCharts[p.ticker] =
+    createSparkChart(
+      canvas,
+      values,
+      color,
+      dataMin,
+      dataMax,
+      pad
+    );
+}
+
+if (mobileCanvas) {
+  createSparkChart(
+    mobileCanvas,
+    values,
+    color,
+    dataMin,
+    dataMax,
+    pad
+  );
 }
 
 function render() {
