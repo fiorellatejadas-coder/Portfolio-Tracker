@@ -267,6 +267,12 @@ footer { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-
   height: 100% !important;
 }
 
+.mobile-pnl-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
   .mobile-row {
     display: flex;
     justify-content: space-between;
@@ -1130,32 +1136,30 @@ if (mobileContainer) {
     <canvas id="mobile-spark-${p.ticker}"></canvas>
   </div>
 
-  <div class="mobile-stats">
+  <div class="mobile-stat">
+  <span>P&L</span>
 
-    <div class="mobile-stat">
-      <span>Value</span>
-      <span>${val != null ? money(val) : '—'}</span>
-    </div>
+  <div class="mobile-pnl-actions">
 
-    <div class="mobile-stat">
-      <span>P&L</span>
-      <span class="${pnl != null && pnl >= 0 ? 'td-pos' : 'td-neg'}">
-        ${pnl != null ? (pnl >= 0 ? '+' : '-') + money(pnl) : '—'}
-      </span>
+    <span class="${pnl != null && pnl >= 0 ? 'td-pos' : 'td-neg'}">
+      ${pnl != null ? (pnl >= 0 ? '+' : '-') + money(pnl) : '—'}
+    </span>
+
+    <div class="mobile-actions">
+      <button class="mobile-buy"
+              onclick="openTrade('${p.ticker}','buy')">
+        +
+      </button>
+
+      <button class="mobile-sell"
+              onclick="openTrade('${p.ticker}','sell')">
+        −
+      </button>
     </div>
 
   </div>
+</div>
 
- <div class="mobile-actions">
-  <button class="mobile-buy"
-          onclick="openTrade('${p.ticker}','buy')">
-    +
-  </button>
-
-  <button class="mobile-sell"
-          onclick="openTrade('${p.ticker}','sell')">
-    −
-  </button>
 </div>
 
 </div>
