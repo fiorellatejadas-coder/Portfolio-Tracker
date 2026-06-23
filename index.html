@@ -964,6 +964,10 @@ if (mobileCanvas) {
   );
 }
 
+  });
+
+}
+
 function render() {
   // Equity value (no cash)
   const equityVal = positions.reduce((s, p) => s + (priceMap[p.ticker] ?? 0) * p.shares, 0);
