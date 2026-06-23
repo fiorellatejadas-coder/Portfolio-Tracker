@@ -209,16 +209,21 @@ footer { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-
 }
 
 .mobile-actions button {
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  border-radius: 50%;
-  padding: 0;
-  font-size: 20px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 0 0 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  max-width: 36px !important;
+
+  border-radius: 50% !important;
+  padding: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  font-size: 20px !important;
+  font-weight: 700 !important;
 }
   .mobile-buy {
   color: var(--green);
@@ -258,13 +263,7 @@ footer { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-
     font-size: 13px;
   }
 
-  .mobile-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
-  }
-
-  body { padding: 1rem; }
+   body { padding: 1rem; }
   .main-layout { grid-template-columns: 1fr; }
   header { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
