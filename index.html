@@ -978,7 +978,8 @@ function render() {
   // MOBILE CARDS
 const mobileContainer = document.getElementById('mobile-cards');
 
-mobileContainer.innerHTML = positions.map(p => {
+if (mobileContainer) {
+  mobileContainer.innerHTML = positions.map(p => {
 
   const pr = priceMap[p.ticker];
   const val = pr != null ? pr * p.shares : null;
@@ -1027,6 +1028,7 @@ mobileContainer.innerHTML = positions.map(p => {
   `;
 
 }).join('');
+}  
 
 // PIE CHART
 $('legend').innerHTML = pieLabels.map((label, i) =>
