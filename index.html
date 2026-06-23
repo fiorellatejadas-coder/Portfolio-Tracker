@@ -146,11 +146,64 @@ tr.cash-row-tr .ticker-name { color: var(--blue); }
 
 footer { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 1rem; }
 
+.mobile-cards {
+  display: none;
+}
+
 @media (max-width: 780px) {
+
+  .table-box {
+    display: none;
+  }
+
+  .mobile-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mobile-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .mobile-ticker {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .mobile-company {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .mobile-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+
+  .mobile-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .mobile-actions button {
+    flex: 1;
+  }
+
   body { padding: 1rem; }
   .main-layout { grid-template-columns: 1fr; }
   header { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
+
 </style>
 </head>
 <body>
