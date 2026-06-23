@@ -1005,13 +1005,13 @@ function render() {
         </div>
 
         <div class="mobile-stat">
-          <span>Value</span>
-          <span>${val != null ? money(val) : '—'}</span>
-        </div>
-
-        <div class="mobile-stat">
           <span>Shares</span>
           <span>${p.shares.toLocaleString('en-US',{maximumFractionDigits:4})}</span>
+        </div>
+        
+        <div class="mobile-stat">
+          <span>Value</span>
+          <span>${val != null ? money(val) : '—'}</span>
         </div>
 
         <div class="mobile-stat">
