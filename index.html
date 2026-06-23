@@ -975,7 +975,63 @@ function render() {
     options: { responsive: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.label + ': ' + (tv > 0 ? (c.raw/tv*100).toFixed(1) : 0) + '%' } } }, cutout: '62%' }
   });
 
-  $('legend').innerHTML = pieLabels.map((label, i) =>
+  // MOBILE CARDS
+const mobileContainer = document.getElementById('mobile-cards');
+
+mobileContainer.innerHTML = positions.map(p => {
+
+  const pr = priceMap[p.ticker];
+  const val = pr != null ? pr * p.shares : null;
+  const pnl = val != null ? val - p.cost * p.shares : null;
+  const day = dayChgMap[p.ticker];
+
+  return `
+    <div class="mobile-card">
+
+      <div class="mobile-ticker">${p.ticker}</div>
+
+      <div class="mobile-company">
+        ${nameMap[p.ticker] || ''}
+      </div>
+
+      <div class="mobile-row">
+        <span>Value</span>
+        <span>${val != null ? money(val) : '—'}</span>
+      </div>
+
+      <div class="mobile-row">
+        <span>P&L</span>
+        <span class="${pnl != null && pnl >= 0 ? 'td-pos' : 'td-neg'}">
+          ${pnl != null ? (pnl >= 0 ? '+' : '-') + money(pnl) : '—'}
+        </span>
+      </div>
+
+      <div class="mobile-row">
+        <span>Today</span>
+        <span class="${day != null && day >= 0 ? 'td-pos' : 'td-neg'}">
+          ${day != null ? pct(day) : '—'}
+        </span>
+      </div>
+
+      <div class="mobile-actions">
+        <button onclick="openTrade('${p.ticker}','buy')">
+          Buy
+        </button>
+
+        <button onclick="openTrade('${p.ticker}','sell')">
+          Sell
+        </button>
+      </div>
+
+    </div>
+  `;
+
+}).join('');
+
+// PIE CHART
+$('legend').innerHTML = pieLabels.map((label, i) =>
+
+$('legend').innerHTML = pieLabels.map((label, i) =>
     `<div class="leg-item"><span class="leg-dot" style="background:${pieColors[i]}"></span>${label}</div>`
   ).join('');
 }
