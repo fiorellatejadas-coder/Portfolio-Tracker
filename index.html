@@ -1029,46 +1029,47 @@ if (mobileContainer) {
   const pnl = val != null ? val - p.cost * p.shares : null;
   const day = dayChgMap[p.ticker];
 
-  return `
-    <div class="mobile-card">
+ return `
+<div class="mobile-card">
 
+  <div class="mobile-header">
+
+    <div>
       <div class="mobile-ticker">${p.ticker}</div>
-
       <div class="mobile-company">
         ${nameMap[p.ticker] || ''}
       </div>
-
-      <div class="mobile-row">
-        <span>Value</span>
-        <span>${val != null ? money(val) : '—'}</span>
-      </div>
-
-      <div class="mobile-row">
-        <span>P&L</span>
-        <span class="${pnl != null && pnl >= 0 ? 'td-pos' : 'td-neg'}">
-          ${pnl != null ? (pnl >= 0 ? '+' : '-') + money(pnl) : '—'}
-        </span>
-      </div>
-
-      <div class="mobile-row">
-        <span>Today</span>
-        <span class="${day != null && day >= 0 ? 'td-pos' : 'td-neg'}">
-          ${day != null ? pct(day) : '—'}
-        </span>
-      </div>
-
-      <div class="mobile-actions">
-        <button onclick="openTrade('${p.ticker}','buy')">
-          Buy
-        </button>
-
-        <button onclick="openTrade('${p.ticker}','sell')">
-          Sell
-        </button>
-      </div>
-
     </div>
-  `;
+
+    <div class="${day != null && day >= 0 ? 'mobile-day-pos' : 'mobile-day-neg'}">
+      ${day != null ? pct(day) : '—'}
+    </div>
+
+  </div>
+
+  <div class="mobile-stats">
+
+    <div class="mobile-stat">
+      <span>Value</span>
+      <span>${val != null ? money(val) : '—'}</span>
+    </div>
+
+    <div class="mobile-stat">
+      <span>P&L</span>
+      <span class="${pnl != null && pnl >= 0 ? 'td-pos' : 'td-neg'}">
+        ${pnl != null ? (pnl >= 0 ? '+' : '-') + money(pnl) : '—'}
+      </span>
+    </div>
+
+  </div>
+
+  <div class="mobile-actions">
+    <button onclick="openTrade('${p.ticker}','buy')">+</button>
+    <button onclick="openTrade('${p.ticker}','sell')">−</button>
+  </div>
+
+</div>
+`;
 
 }).join('');
 }  
