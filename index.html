@@ -209,6 +209,26 @@ footer { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-
 
 .mobile-actions button {
   flex: 1;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+  .mobile-buy {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.mobile-buy:hover {
+  background: rgba(52,211,153,0.1);
+}
+
+.mobile-sell {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.mobile-sell:hover {
+  background: rgba(248,113,113,0.1);
 }
 
   .mobile-ticker {
@@ -1063,10 +1083,17 @@ if (mobileContainer) {
 
   </div>
 
-  <div class="mobile-actions">
-    <button onclick="openTrade('${p.ticker}','buy')">+</button>
-    <button onclick="openTrade('${p.ticker}','sell')">−</button>
-  </div>
+ <div class="mobile-actions">
+  <button class="mobile-buy"
+          onclick="openTrade('${p.ticker}','buy')">
+    +
+  </button>
+
+  <button class="mobile-sell"
+          onclick="openTrade('${p.ticker}','sell')">
+    −
+  </button>
+</div>
 
 </div>
 `;
