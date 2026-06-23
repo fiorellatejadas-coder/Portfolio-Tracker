@@ -1114,7 +1114,7 @@ if (mobileContainer) {
   const pnl = val != null ? val - p.cost * p.shares : null;
   const day = dayChgMap[p.ticker];
 
- return `
+return `
 <div class="mobile-card">
 
   <div class="mobile-header">
@@ -1137,42 +1137,32 @@ if (mobileContainer) {
   </div>
 
   <div class="mobile-stat">
-  <span>P&L</span>
+    <span>Value</span>
+    <span>${val != null ? money(val) : '—'}</span>
+  </div>
 
-  <div class="mobile-pnl-actions">
+  <div class="mobile-stat">
+    <span>P&L</span>
 
     <span class="${pnl != null && pnl >= 0 ? 'td-pos' : 'td-neg'}">
       ${pnl != null ? (pnl >= 0 ? '+' : '-') + money(pnl) : '—'}
     </span>
-
-    <div class="mobile-actions">
-      <button class="mobile-buy"
-              onclick="openTrade('${p.ticker}','buy')">
-        +
-      </button>
-
-      <button class="mobile-sell"
-              onclick="openTrade('${p.ticker}','sell')">
-        −
-      </button>
-    </div>
-
   </div>
-</div>
 
-</div>
+  <div class="mobile-actions">
+    <button class="mobile-buy"
+            onclick="openTrade('${p.ticker}','buy')">
+      +
+    </button>
+
+    <button class="mobile-sell"
+            onclick="openTrade('${p.ticker}','sell')">
+      −
+    </button>
+  </div>
 
 </div>
 `;
-
-}).join('');
-}  
-
-// PIE CHART
-$('legend').innerHTML = pieLabels.map((label, i) =>
-    `<div class="leg-item"><span class="leg-dot" style="background:${pieColors[i]}"></span>${label}</div>`
-  ).join('');
-}
 
 function removeCash() {
   cash = 0;
